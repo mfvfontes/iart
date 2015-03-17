@@ -5,7 +5,10 @@
  *      Author: ei12183
  */
 #include <iostream>
+#include <vector>
 #include <cassert>
+#include "ANN.h"
+#include "TrainingData.h"
 
 using namespace std;
 

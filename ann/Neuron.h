@@ -11,7 +11,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <vector>
-#include "Connection.h"
 
 using namespace std;
 
@@ -21,6 +20,8 @@ struct Connection{
 };
 
 class Neuron {
+
+	typedef vector <Neuron> Layer;
 
 public:
 	Neuron(unsigned n_outputs, unsigned index);

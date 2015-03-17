@@ -24,7 +24,7 @@ void TrainingData::getTopology(vector <unsigned> &topology){
 	ss >> label;
 
 	if(this->isEof() || label.compare("topology:") != 0)
-		abort();
+		return;
 
 	while(!ss.eof()){
 		unsigned n;

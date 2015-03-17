@@ -2,14 +2,20 @@
 #include "ANN.h"
 
 ANN::ANN(const vector <unsigned> &topology){
+
 	unsigned nlayers = topology.size();
+
+	rms = 0.0;
+	recent_average_error = 0.0;
+	recent_average_smooth_factor = 0.0;
+
 
 	for(unsigned l = 0; l < nlayers; l++){
 		layers.push_back(Layer());
 		unsigned n_outputs = (l == topology.size() - 1) ? 0 : topology[l+1];
 
 		for(unsigned n = 0; n <= topology[l]; n++)
-			layers.back().push_back(Neuron(n_outputs));
+			layers.back().push_back(Neuron(n_outputs, n));
 
 		//Force the bias node's output value 1.0. It's the last neuron created above
 		layers.back().back().setOutput(1.0);
@@ -86,7 +92,7 @@ void ANN::getResults(vector <double> &results) const{
 
 	results.clear();
 
-	for(unsigned n = 0; n < layers.back().size(); n++)
+	for(unsigned int n = 0; n < layers.back().size() - 1; n++)
 		results.push_back(layers.back()[n].getOutput());
 
 }

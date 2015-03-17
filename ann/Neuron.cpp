@@ -19,10 +19,6 @@ Neuron::Neuron(unsigned n_outputs, unsigned _index) {
 	index = _index;
 }
 
-Neuron::~Neuron() {
-
-}
-
 void Neuron::fforward(Layer &prev_layer){
 	double sum = 0.0;
 
