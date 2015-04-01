@@ -1,4 +1,8 @@
+import input.InputFunction;
+
 import java.io.Serializable;
+
+import transfer.TransferFunction;
 
 public class Neuron implements Serializable{
 
