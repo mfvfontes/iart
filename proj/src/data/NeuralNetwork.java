@@ -1,5 +1,8 @@
+package data;
 import java.io.Serializable;
 import java.util.ArrayList;
+import util.WeightsRandomizer;
+import util.RangedRandomizer;
 
 public class NeuralNetwork implements Serializable{
 
@@ -50,6 +53,16 @@ public class NeuralNetwork implements Serializable{
 		Layer layer = layers.get(index);
 		
 		return removeLayer(layer);
+	}
+	
+	public void randomizeWeights(){
+		WeightsRandomizer generator = new WeightsRandomizer();
+		generator.randomize(this);
+	}
+	
+	public void randomizeWeights(double min, double max){
+		RangedRandomizer generator = new RangedRandomizer(min, max);
+		generator.randomize(this);
 	}
 	
 	public void reset(){

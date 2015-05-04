@@ -1,3 +1,4 @@
+package data;
 import java.io.Serializable;
 
 public class Connection implements Serializable{

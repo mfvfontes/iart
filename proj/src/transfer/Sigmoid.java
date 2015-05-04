@@ -7,6 +7,10 @@ public class Sigmoid extends TransferFunction implements Serializable{
 
 	private double slope = 1.0;
 	
+	public Sigmoid (){
+		
+	}
+	
 	public Sigmoid(double _slope){
 		slope = _slope;
 	}
