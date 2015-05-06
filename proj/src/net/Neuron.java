@@ -1,4 +1,4 @@
-package data;
+package net;
 
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -100,6 +100,18 @@ public class Neuron implements Serializable{
 
 	public void setOutputConnections(ArrayList <Connection> _outputConnections){
 		outputConnections = _outputConnections;
+	}
+	
+	public void calcIO(){
+		if(inputConnections.size() > 0) //if has any input connections (i.e does not belong to first layer)
+			input = inputFunction.getOutput(inputConnections);
+		
+		output = transferFunction.getOutput(input);
+	}
+	
+	public void initWeights(double value){
+		for(Connection con : inputConnections)
+			con.getWeight().setValue(value);
 	}
 	
 	public void reset(){

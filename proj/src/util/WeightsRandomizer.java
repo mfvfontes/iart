@@ -1,10 +1,11 @@
 package util;
 
 import java.util.Random;
-import data.NeuralNetwork;
-import data.Layer;
-import data.Neuron;
-import data.Connection;
+
+import net.Connection;
+import net.Layer;
+import net.NeuralNetwork;
+import net.Neuron;
 
 public class WeightsRandomizer {
 	

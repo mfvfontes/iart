@@ -1,4 +1,4 @@
-package data;
+package net;
 import java.io.Serializable;
 import java.util.ArrayList;
 import util.WeightsRandomizer;

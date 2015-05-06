@@ -1,4 +1,4 @@
-package data;
+package net;
 import java.io.Serializable;
 
 public class Weight implements Serializable{

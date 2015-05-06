@@ -1,4 +1,4 @@
-package data;
+package net;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -77,6 +77,11 @@ public class Layer implements Serializable{
 	
 	public int indexOf(Neuron neuron){
 		return neurons.indexOf(neuron);
+	}
+	
+	public void initWeights(double value){
+		for(Neuron neuron : neurons)
+			neuron.initWeights(value);
 	}
 	
 	public void reset(){
