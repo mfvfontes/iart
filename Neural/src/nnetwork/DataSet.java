@@ -27,7 +27,7 @@ public class DataSet {
         this.nHeaderVars = nHeaderVars;
 
         readFile(inputFile);
-        //standardization();
+        standardization();
 
         System.out.println("DataSet initialized");
     }

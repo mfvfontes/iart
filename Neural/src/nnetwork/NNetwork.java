@@ -137,7 +137,7 @@ public class NNetwork {
                 sum += Math.pow(expected - actual, 2);
             }
 
-            error += sum/2.0;
+            error += sum/(2.0*dataSet.getnEntries());
         }
 
 

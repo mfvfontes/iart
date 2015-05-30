@@ -17,7 +17,7 @@ public class NetworkTest {
 
         network.buildFromData(set,nNeurons);
 
-        network.train(0.2);
+        network.train(0.005);
 
         System.out.println(set);
     }
