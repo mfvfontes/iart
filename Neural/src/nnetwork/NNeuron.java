@@ -35,7 +35,7 @@ public class NNeuron {
     }
 
     private void calculateDerivative() {
-        derivative = sum * (1.0 - sum);
+        derivative = output * (1.0 - output);
     }
 
 

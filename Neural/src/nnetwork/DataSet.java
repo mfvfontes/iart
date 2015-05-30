@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * Created by João on 28/05/2015.
  */
 public class DataSet {
-    public ArrayList< ArrayList<Float>> inputData, outputData;
+    public ArrayList< ArrayList<Double>> inputData, outputData;
 
     // Needed for data standardization
-    private ArrayList<Float> min, max;
+    private ArrayList<Double> min, max;
     private boolean initialized = false;
 
     private int nEntries, outputVars, nHeaderVars;
@@ -18,16 +18,16 @@ public class DataSet {
     public DataSet(File inputFile, int nOutputVars, int nHeaderVars) {
 
         // Initializations
-        inputData = new ArrayList<ArrayList<Float>>();
-        outputData = new ArrayList<ArrayList<Float>>();
-        min = new ArrayList<Float>();
-        max = new ArrayList<Float>();
+        inputData = new ArrayList<ArrayList<Double>>();
+        outputData = new ArrayList<ArrayList<Double>>();
+        min = new ArrayList<Double>();
+        max = new ArrayList<Double>();
         outputVars = nOutputVars;
         nEntries = 0;
         this.nHeaderVars = nHeaderVars;
 
         readFile(inputFile);
-        standardization();
+        //standardization();
 
         System.out.println("DataSet initialized");
     }
@@ -52,16 +52,16 @@ public class DataSet {
     private void parseLine(String[] lineVars) {
         if (! initialized) {
             for (int i = 0, lineVarsLength = lineVars.length - nHeaderVars; i < lineVarsLength; i++) {
-                min.add(Float.MAX_VALUE);
-                max.add(Float.MIN_VALUE);
+                min.add(Double.MAX_VALUE);
+                max.add(Double.MIN_VALUE);
             }
 
             initialized = true;
         }
 
-        ArrayList<Float> inputVarArray = new ArrayList<Float>();
+        ArrayList<Double> inputVarArray = new ArrayList<Double>();
         for (int inputVarIndex = nHeaderVars; inputVarIndex < lineVars.length - outputVars; inputVarIndex++) {
-            float value = Float.parseFloat(lineVars[inputVarIndex]);
+            double value = Double.parseDouble(lineVars[inputVarIndex]);
             inputVarArray.add(value);
 
             if (value > max.get(inputVarIndex-nHeaderVars))
@@ -71,9 +71,9 @@ public class DataSet {
         }
         inputData.add(inputVarArray);
 
-        ArrayList<Float> outputVarArray = new ArrayList<Float>();
+        ArrayList<Double> outputVarArray = new ArrayList<Double>();
         for (int outputVarIndex = inputVarArray.size(); outputVarIndex < outputVars + inputVarArray.size(); outputVarIndex++) {
-            float value = Float.parseFloat(lineVars[outputVarIndex + nHeaderVars]);
+            double value = Double.parseDouble(lineVars[outputVarIndex + nHeaderVars]);
             outputVarArray.add(value);
 
             if (value > max.get(outputVarIndex))
@@ -92,30 +92,30 @@ public class DataSet {
     }
 
     private void standardization() {
-        for (ArrayList<Float> line : inputData) {
+        for (ArrayList<Double> line : inputData) {
             for (int i = 0; i < line.size(); i++) {
-                Float oldValue = line.get(i);
-                Float newValue = (oldValue - min.get(i)) / (max.get(i) - min.get(i));
+                Double oldValue = line.get(i);
+                Double newValue = (oldValue - min.get(i)) / (max.get(i) - min.get(i));
 
                 if ((max.get(i) - min.get(i)) != 0)
                     line.set(i,newValue);
                 else
-                    line.set(i,1f);
+                    line.set(i,1.0);
 
 //                System.out.println("Replaced var number " + i + " - " + oldValue + " with " + newValue + "\t\t(" + oldValue + " - " + min.get(i) + ") / (" + max.get(i) + " - " + min.get(i) + ")" );
 
             }
         }
 
-        for (ArrayList<Float> line : outputData) {
+        for (ArrayList<Double> line : outputData) {
             for (int i = 0; i < line.size(); i++) {
-                Float oldValue = line.get(i);
-                Float newValue = (oldValue - min.get(i+inputData.get(0).size())) / (max.get(i+inputData.get(0).size()) - min.get(i+inputData.get(0).size()));
+                Double oldValue = line.get(i);
+                Double newValue = (oldValue - min.get(i+inputData.get(0).size())) / (max.get(i+inputData.get(0).size()) - min.get(i+inputData.get(0).size()));
 
                 if ((max.get(i+inputData.get(0).size()) - min.get(i+inputData.get(0).size())) != 0)
                     line.set(i,newValue);
                 else
-                    line.set(i,1f);
+                    line.set(i,1.0);
 
 
 //                System.out.println("Replaced " + oldValue + " with " + newValue);

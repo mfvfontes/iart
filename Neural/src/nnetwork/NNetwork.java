@@ -63,8 +63,8 @@ public class NNetwork {
         // Para cada linha do input fazer o feed forward da rede
 
         for (int inputIndex = 0; inputIndex < dataSet.getnEntries(); inputIndex++) {
-            ArrayList<Float> input = dataSet.inputData.get(inputIndex);
-            ArrayList<Float> expectedOutput = dataSet.outputData.get(inputIndex);
+            ArrayList<Double> input = dataSet.inputData.get(inputIndex);
+            ArrayList<Double> expectedOutput = dataSet.outputData.get(inputIndex);
 
             setInputs(inputIndex);
             networkFeedForward();
@@ -122,6 +122,7 @@ public class NNetwork {
 
                         synapseNeuronDeltaMap.put(synapse,delta);
                         synapse.setWeight(synapse.getWeight() - delta);
+
                     }
                 }
 
@@ -139,7 +140,11 @@ public class NNetwork {
             error += sum/2.0;
         }
 
+
+        System.out.println("Error = " + error);
         return error;
+
+
     }
 
     private void setInputs(int entryIndex) {

@@ -11,6 +11,7 @@ public class NSynapse {
     public NSynapse(NNeuron sourceNeuron) {
         this.sourceNeuron = sourceNeuron;
         weight = NNetwork.getStartingWeight();
+        System.out.println(weight);
     }
 
     public NNeuron getSourceNeuron() {

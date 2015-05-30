@@ -8,15 +8,16 @@ import java.io.File;
 public class NetworkTest {
 
     public static void main(String[] args) {
-        DataSet set = new DataSet(new File("data/test_data.txt"),1,1);
+        DataSet set = new DataSet(new File("data/train_data.txt"),2,1);
 
-        NNetwork network = new NNetwork(0.1, 0.9, 0);
+        //double learningRate, double momentum, double characteristicTime
+        NNetwork network = new NNetwork(0.7, .5, 0);
 
-        int[] nNeurons = {10};
+        int[] nNeurons = {30,20};
 
         network.buildFromData(set,nNeurons);
 
-        network.train(0.1);
+        network.train(0.2);
 
         System.out.println(set);
     }
