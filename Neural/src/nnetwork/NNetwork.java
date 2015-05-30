@@ -27,12 +27,12 @@ public class NNetwork {
     }
 
 
-    public void train(double errorThreshold) {
+    public void train(int iterations) {
         double error;
         double sum = 0.0;
         int epoch = 1;
-        double average = 25;
-        int samples = 25;
+        double average = 500;
+        int samples = 500;
 
         double[] errors = new double[samples];
 
@@ -45,14 +45,15 @@ public class NNetwork {
 
             if (epoch > samples) {
                 average = sum / samples;
+
             }
 
             epoch ++;
             currentEpoch = epoch;
 
-            System.out.println("End of epoch with average error = " + average );
+            System.out.println("Error: " + error );
 
-        } while (average > errorThreshold);
+        } while (currentEpoch < iterations); //better be iterations
     }
 
     public double backPropagate() {
@@ -141,10 +142,29 @@ public class NNetwork {
         }
 
 
-        System.out.println("Error = " + error);
+        //System.out.println("Error = " + error);
         return error;
 
 
+    }
+
+    public void test(){
+
+        for(int inputIndex = 0; inputIndex < dataSet.inputData.size(); inputIndex++) {
+
+            ArrayList<Double> input = dataSet.inputData.get(inputIndex);
+            ArrayList<Double> expectedOutput = dataSet.outputData.get(inputIndex);
+
+            setInputs(inputIndex);
+            networkFeedForward();
+
+            for (int outputVarIndex = 0; outputVarIndex < dataSet.getnOutputVars(); outputVarIndex++) {
+                double expected = expectedOutput.get(outputVarIndex);
+                double actual = output.getNeurons().get(outputVarIndex).getOutput();
+                System.out.println("Expected: " + expected);
+                System.out.println("Actual: " + actual);
+            }
+        }
     }
 
     private void setInputs(int entryIndex) {
@@ -206,6 +226,10 @@ public class NNetwork {
         }
 
         output = layers.get(layers.size() - 1);
+    }
+
+    public void setDataSet(DataSet set){
+        dataSet = set;
     }
 
     static public double getStartingWeight() {

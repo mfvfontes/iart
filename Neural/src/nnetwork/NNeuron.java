@@ -24,7 +24,8 @@ public class NNeuron {
     }
 
     private double activation() {
-        return 1.0 / (1 + Math.exp(-1.0 * sum));
+        //return 1.0 / (1 + Math.exp(-1.0 * sum));
+        return (Math.tanh(sum) + 1)/2.0;
     }
 
     private void calculateSum() {
@@ -35,7 +36,8 @@ public class NNeuron {
     }
 
     private void calculateDerivative() {
-        derivative = output * (1.0 - output);
+        //derivative = output * (1.0 - output);
+        derivative = (1 - Math.pow(Math.tanh(sum), 2))/2.0;
     }
 
 

@@ -12,6 +12,7 @@ public class DataSet {
     // Needed for data standardization
     private ArrayList<Double> min, max;
     private boolean initialized = false;
+    private boolean train;
 
     private int nEntries, outputVars, nHeaderVars;
 
